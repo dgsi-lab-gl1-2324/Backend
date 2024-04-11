@@ -13,16 +13,16 @@ router.get('/', function(req, res, next) {
     });
 });
 router.post('/', function(req, res, next) {
-    var cliente = clientes(req.body);
-    clientes.findOne({user: cliente.name}, function(err, user){
-        if(err){
+    clientes.findOne({user: req.body.name}, function(err, user){
+        if(err)
             return res.status(500).send('Error en la comprobación de usuario');
-        }
-        if(user){
+        
+        if(user)
             return res.status(400).json({message: 'The user already exists'});
-        }
-        cliente.save().then(function(cliente){
-            res.status(201).json(cliente);
+        
+        var newClientes = new clientes(req.body);
+        newClientes.save().then(function(clientes){
+            res.status(201).json(clientes);
         }).catch(function(err){
             res.status(500).json(err);
         });
