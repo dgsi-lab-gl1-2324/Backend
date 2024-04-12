@@ -8,16 +8,16 @@ var db = mongoose.connection;
 router.get('/', function(req, res, next) {
     empleados.findOne({user: req.query.nombre}, function(err, user){
         if(err)
-            return res.status(500).send('Error en la comprobación de usuario');
+            res.status(500).send('Error en la comprobación de usuario');
         
         if(user){
             if(user.pass === req.query.pass)
-                return res.status(200).json(user);
+                res.status(200).json(user);
             else 
-                return res.status(400).json({message: 'Incorrect password'});
+                res.status(400).json({message: 'Contraseña incorrecta'});
             
         }
-        return res.status(400).json({message: 'The user does not exist'});
+        res.status(400).json({message: 'No es un empleado'});
     });
 
 });
