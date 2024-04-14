@@ -5,21 +5,8 @@ var clientes = require('../models/clientes');
 mongoose.set('strictQuery', false);
 var db = mongoose.connection;
 
-router.get('/', function(req, res, next) {
-    clientes.findOne({user: req.body.correo},function(err,clientes){
-        if(err)
-            res.status(500).send('Error en la comprobación de usuario');
-        if(!clientes)
-            res.status(400).json({message: 'The user does not exist'});
-        
-        res.status(200).json(clientes);
-
-    }).catch(function(err){
-        res.status(500).json(err);
-    });
-});
-router.post('/', function(req, res, next) {
-    clientes.findOne({user: req.body.correo}, function(err, user){
+router.post('/:id', function(req, res, next) {
+    clientes.findOne({user: req.params.id}, function(err, user){
         if(err)
             res.status(500).send('Error en la comprobación de usuario');
         
