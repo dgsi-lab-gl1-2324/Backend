@@ -17,6 +17,8 @@ var cors = require('cors');   //nuevo
 app.use(cors());  //nuevo
 app.use(bodyParser.json({limit: '50mb'}));  //nuevo
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));   //nuevo
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 var mongoose=require("mongoose");
 
