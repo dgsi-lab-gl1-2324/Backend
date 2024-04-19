@@ -2,15 +2,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ContratacionSchema = new Schema({
-    usuario: String,
+    email: String,
+    nombre: String,
     ubicacion: String,
     fecha: String,
     hora: String,
     descripcion: String,
     presupuesto: String,
-    resolucion:{
-        type: String,
-        default: "Pendiente"
-    }
+    resolucion: String,
 });
 module.exports = mongoose.model('Contratacion', ContratacionSchema);
